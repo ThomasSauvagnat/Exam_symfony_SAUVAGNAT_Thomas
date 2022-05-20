@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des produits{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1 class="mb-3">Mes produits</h1>
+        <a href="{{ path('app_product_add') }}" class="mb-3"><i class="fa-solid fa-plus"></i><button class="btn btn-secondary">Ajouter un produit</button></a>
+        <table class="table table-primary table-hover table-bordered text-center">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Date de création</th>
+                <th>Actif</th>
+                <th colspan="2">Options</th>
+            </tr>
+            </thead>
+            <tbody>
+            {%for product in productsUser%}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.createdAt|date('d/m/Y') }}</td>
+                {% if product.isActive == 0%}
+                    <td>Non</td>
+                {% else %}
+                    <td>oui</td>
+                {% endif %}
+                <td><a href="{{ path('app_product_update', {id:product.id}) }}"><i class="fa-solid fa-pen"></i></a></td>
+                <td>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#e{{product.id}}">
+                        <i class="fa-solid fa-circle-minus"></i>
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="e{{product.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Supprimer un produit</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Etes-vous sûr de vouloir supprimer {{product.name}} ?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                    <a href="{{ path('app_product_delete', {id: product.id}) }}"><button type="button" class="btn btn-danger">Supprimer</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

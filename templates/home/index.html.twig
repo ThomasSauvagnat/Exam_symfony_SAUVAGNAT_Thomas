@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acceuil{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        {% for product in pagination %}
+        <div class="col-lg-4 mt-5">
+           {% include 'common/_card.html.twig' %}
+        </div>
+        {% endfor %}
+        <div class="pagination mx-auto">
+            {{ knp_pagination_render(pagination, "@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig") }}
+        </div>
+    </div>
+</div>
+{% endblock %}

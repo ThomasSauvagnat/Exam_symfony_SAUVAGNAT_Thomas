@@ -1,0 +1,7 @@
+<div>
+    <img src="{{product.imagePath}}">
+</div>
+<h3>{{ product.name }}</h3>
+<h5>Date de création : {{ product.createdAt|date('d/m/Y') }}</h5>
+<h4>Par : {{ product.createdBy.email }}</h4>
+<a href="{{path('app_product_isActiveOrNot', {id:product.id}) }}"><i class="fa-solid fa-eye-slash"></i></a>

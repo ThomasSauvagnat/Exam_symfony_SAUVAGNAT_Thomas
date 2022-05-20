@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification d'un produit{% endblock %}
+
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h1>Modifier un produit</h1>
+            {{ form_start(form) }}
+                {{form_row(form.name)}}
+                {{form_row(form.imagePath)}}
+                {{form_row(form.isActive)}}
+                <button type="submit" class="btn btn-secondary">Modifier le produit</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

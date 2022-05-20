@@ -1,0 +1,9 @@
+App\Entity\User:
+    user{0..50}:
+      email (unique): '<email()>'
+      password: '<word()>'
+      products: '<numberBetween(1, 3)>x @product*'
+
+#     id: 52
+#     mail : test@hotmail.fr
+#     MDP : azerty
