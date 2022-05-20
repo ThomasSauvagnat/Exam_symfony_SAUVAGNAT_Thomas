@@ -67,13 +67,16 @@ class ProductsController extends AbstractController
     #[Route('/produits/modifier/{id}', name: 'app_product_update')]
     public function updateProduct(Product $product ,Request $request , EntityManagerInterface $entityManager): Response
     {
+        $userEntity = $this->getUser();
         $form = $this->createForm(ProductUpdateType::class, $product);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($product);
-            $entityManager->flush();
-            return $this->redirectToRoute('app_products');
+            if ($userEntity === $product->getCreatedBy()) {
+                $entityManager->persist($product);
+                $entityManager->flush();
+                return $this->redirectToRoute('app_products');
+            }
         }
 
         return $this->render('products/updateProduct.html.twig', [
