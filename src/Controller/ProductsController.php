@@ -45,7 +45,9 @@ class ProductsController extends AbstractController
     #[Route('/produits/ajouter', name: 'app_product_add')]
     public function addProduct(Request $request , EntityManagerInterface $entityManager,UserRepository $userRepository): Response
     {
+        // Récupération de l'utilisateur
         $userEntity = $this->getUser();
+        // Création du formulaire
         $form = $this->createForm(ProductType::class, new Product());
         $form->handleRequest($request);
 
