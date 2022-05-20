@@ -19,7 +19,7 @@
             <tbody>
             {%for product in productsUser%}
             <tr>
-                <td>{{ product.name }}</td>
+                <td><a href="{{ path('app_products_details', {id:product.id}) }}" class="text-decoration-none text-black">{{ product.name }}</a></td>
                 <td>{{ product.createdAt|date('d/m/Y') }}</td>
                 {% if product.isActive == 0%}
                     <td>Non</td>

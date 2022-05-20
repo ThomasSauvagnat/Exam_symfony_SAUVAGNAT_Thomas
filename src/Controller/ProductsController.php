@@ -34,6 +34,14 @@ class ProductsController extends AbstractController
         ]);
     }
 
+    #[Route('/produits/details/{id}', name: 'app_products_details')]
+    public function detailsProduct(Product $product ,UserRepository $userRepository): Response
+    {
+        return $this->render('products/detailsProduct.html.twig', [
+            'product' => $product,
+        ]);
+    }
+
     #[Route('/produits/ajouter', name: 'app_product_add')]
     public function addProduct(Request $request , EntityManagerInterface $entityManager,UserRepository $userRepository): Response
     {
